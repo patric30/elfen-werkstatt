@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sicherheit · Elfen-Werkstatt</title>
+<meta name="description" content="Alle Projekte laufen mit 5 Volt über USB und sind ungefährlich, wenn ihr diese Regeln beachtet.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fredoka:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: Ein Adventskalender als Werkbank. Oben 24 Türchen, darunter öffnet sich die Tageskarte mit Schaltplan. */
+:root {
+  --bg: #eef2f6;
+  --surface: #ffffff;
+  --ink: #18212f;
+  --muted: #5b6678;
+  --line: #d5dce6;
+  --pine: #1c6a4e;
+  --pine-soft: #dcefe6;
+  --night: #24365c;
+  --night-soft: #dfe6f3;
+  --berry: #b5323a;
+  --gold: #b97f00;
+  --gold-soft: #f6e7c1;
+  --sch-bg: #ffffff;
+  --led-red: #e5484d;
+  --led-green: #2f9e6a;
+  --led-yellow: #f2c200;
+  --led-blue: #3e63dd;
+  --led-white: #f2f4f7;
+  --code-bg: #17213a;
+  --code-ink: #e8edf6;
+  --code-comment: #8fa3c4;
+  --code-try: #ffd66b;
+  --f-display: "Fredoka", "Avenir Next Rounded", "Arial Rounded MT Bold", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0c1320; --surface: #141f31; --ink: #e5eaf2; --muted: #95a2b7; --line: #263449;
+    --pine: #56c495; --pine-soft: #17352b; --night: #9db4e8; --night-soft: #1a2741;
+    --berry: #ff7a7f; --gold: #f2c14e; --gold-soft: #3a2f12; --sch-bg: #141f31;
+    --led-white: #dfe5ee; --code-bg: #0a1018; --code-ink: #e8edf6; --code-comment: #8496b4; --code-try: #ffd66b; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0c1320; --surface: #141f31; --ink: #e5eaf2; --muted: #95a2b7; --line: #263449;
+  --pine: #56c495; --pine-soft: #17352b; --night: #9db4e8; --night-soft: #1a2741;
+  --berry: #ff7a7f; --gold: #f2c14e; --gold-soft: #3a2f12; --sch-bg: #141f31;
+  --led-white: #dfe5ee; --code-bg: #0a1018; --code-ink: #e8edf6; --code-comment: #8496b4; --code-try: #ffd66b; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 1.0625rem; line-height: 1.6;
+  padding-block: 0 72px; -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: calc(1160px + 2 * clamp(16px, 4vw, 44px)); margin-inline: auto; padding-inline: clamp(16px, 4vw, 44px); }
+h1, h2, h3 { font-family: var(--f-display); margin: 0; text-wrap: balance; line-height: 1.1; }
+p { margin: 0; }
+a { color: var(--night); }
+code, .mono { font-family: var(--f-mono); font-size: 0.9em; }
+code { background: var(--bg); padding: 1px 5px; border-radius: 4px; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.eyebrow { font-family: var(--f-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+/* Kopf: Foto über die volle Breite, Text links auf grünem Verlauf */
+.hero { position: relative; min-height: clamp(460px, 64vh, 640px); display: flex; align-items: center; overflow: hidden; background: #143f30; color: #fff; }
+.hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(90deg, rgba(20,63,48,0.97) 0%, rgba(20,63,48,0.9) 38%, rgba(20,63,48,0.35) 62%, rgba(20,63,48,0) 80%); }
+.hero .wrap { position: relative; z-index: 2; width: 100%; padding-block: 56px; }
+.hero-text { max-width: 720px; }
+.hero .eyebrow { color: #cfe3da; }
+.hero h1 { font-size: clamp(2.8rem, 7vw, 5.2rem); font-weight: 700; letter-spacing: -0.01em; margin-top: 10px; color: #fff; }
+.hero h1 span { color: #f2c200; }
+.lede { margin-top: 16px; color: #e3eee9; max-width: 52ch; font-size: 1.15rem; }
+.hero-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.hero-chips span { font-size: 0.9rem; font-weight: 700; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.28); color: #fff; }
+.hero-chips span.gold { background: #f2c200; border-color: #f2c200; color: #18212f; }
+.chain { display: flex; gap: 14px; margin-top: 26px; align-items: center; }
+.chain i { width: 14px; height: 14px; border-radius: 50%; background: var(--c); opacity: 0.3; box-shadow: 0 0 0 transparent; }
+.chain i.on { opacity: 1; box-shadow: 0 0 16px var(--c); }
+.hero-note { position: absolute; right: 14px; bottom: 10px; z-index: 2; font-size: 0.75rem; color: #fff; background: rgba(0,0,0,0.35); padding: 2px 8px; border-radius: 6px; }
+
+/* Was ihr kaufen müsst: breite Box unter dem Hero */
+.need { margin-block: 28px 34px; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px 24px;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); gap: 18px 28px; align-items: center; }
+.need h2 { font-size: 1.35rem; }
+.need h2 small { display: block; font-family: var(--f-body); font-size: 0.88rem; font-weight: 400; color: var(--muted); margin-top: 4px; }
+.need ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.need li { display: grid; gap: 2px; padding: 12px 14px; border-radius: 12px; background: var(--bg); }
+.need li b { font-weight: 700; }
+.need .price { font-family: var(--f-mono); white-space: nowrap; font-size: 1.05rem; color: var(--pine); font-weight: 600; }
+.need li.sum { background: var(--pine-soft); }
+.need small { color: var(--muted); font-size: 0.88rem; line-height: 1.45; }
+.need .extra { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px 28px; padding-top: 12px; border-top: 1px dashed var(--line); }
+
+/* Türchen */
+.doors-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px 20px; margin-block: 8px 14px; }
+.doors-head h2 { font-size: 1.5rem; }
+.key { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.9rem; color: var(--muted); }
+.key span { display: inline-flex; align-items: center; gap: 6px; }
+.key i { width: 12px; height: 12px; border-radius: 3px; background: var(--c); }
+.doors { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.door {
+  position: relative; border: 1px solid var(--line); border-radius: 14px; padding: 12px 12px 10px; min-height: 104px;
+  background: var(--tint); color: var(--ink); cursor: pointer; text-align: left; font: inherit;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 6px;
+  transition: transform .15s ease, border-color .15s ease;
+}
+.door.p1 { --tint: var(--pine-soft); --accent: var(--pine); }
+.door.p2 { --tint: var(--night-soft); --accent: var(--night); }
+.door.fin { --tint: var(--gold-soft); --accent: var(--gold); grid-column: span 2; }
+.door:hover { transform: translateY(-2px); border-color: var(--accent); }
+.door .n { font-family: var(--f-display); font-weight: 700; font-size: 2.1rem; line-height: 1; color: var(--accent); }
+.door .t { font-size: 0.84rem; line-height: 1.3; }
+.door[aria-current="true"] { border: 2px solid var(--accent); padding: 11px 11px 9px; }
+.door.seen::after {
+  content: ""; position: absolute; top: 12px; right: 12px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent);
+}
+
+/* Tageskarte */
+.day { margin-top: 26px; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: clamp(18px, 3vw, 32px); scroll-margin-top: 16px; }
+.day-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+.day-head h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); margin-top: 6px; }
+.meta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+.chip { font-size: 0.85rem; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); display: inline-flex; align-items: center; gap: 6px; }
+.dots { display: inline-flex; gap: 3px; }
+.dots i { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--accent); }
+.dots i.f { background: var(--accent); }
+.nav { display: flex; gap: 8px; }
+.btn { font: inherit; font-size: 0.95rem; border: 1px solid var(--line); background: var(--bg); color: var(--ink); border-radius: 10px; padding: 7px 14px; cursor: pointer; }
+.btn:hover:not(:disabled) { border-color: var(--accent); }
+.btn:disabled { opacity: 0.4; cursor: default; }
+.btn.go { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+.day-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 32px; margin-top: 24px; align-items: start; }
+.story { font-style: italic; font-size: 1.12rem; border-left: 4px solid var(--accent); padding-left: 14px; }
+.blocks { display: grid; gap: 18px; margin-top: 20px; }
+.block h3 { font-family: var(--f-mono); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.block p { max-width: 64ch; }
+.block.bonus { background: var(--gold-soft); border-radius: 12px; padding: 12px 14px; }
+.block.calc { background: var(--bg); border-radius: 12px; padding: 12px 14px; }
+.figure { position: sticky; top: 16px; display: grid; gap: 10px; }
+.sheet { border: 1px solid var(--line); border-radius: 14px; background: var(--sch-bg); padding: 14px; overflow-x: auto; }
+.figure figcaption { font-size: 0.88rem; color: var(--muted); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.tomorrow { margin-top: 26px; padding-top: 18px; border-top: 1px dashed var(--line); display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.tomorrow p { color: var(--muted); max-width: 60ch; }
+
+/* Schaltplan */
+.sch { display: block; width: 100%; height: auto; max-height: 460px; color: var(--ink); }
+.sch .w { fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.sch .thin { stroke-width: 1.4; }
+.sch .b { fill: var(--sch-bg); stroke: currentColor; stroke-width: 2; }
+.sch .fill, .sch .j { fill: currentColor; }
+.sch .o { fill: var(--sch-bg); stroke: currentColor; stroke-width: 1.6; }
+.sch .box { fill: none; stroke: currentColor; stroke-width: 1.6; }
+.sch .dash { stroke-dasharray: 5 4; stroke: var(--muted); }
+.sch text { font-family: var(--f-mono); font-size: 12px; fill: currentColor; }
+.sch .ref { font-weight: 600; }
+.sch .small { font-size: 10.5px; fill: var(--muted); }
+.sch .net { font-weight: 600; fill: var(--berry); }
+.sch .pin { font-size: 11px; }
+.sch .num { font-size: 9px; fill: var(--muted); }
+.pins { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+.pins th, .pins td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.pins th { font-family: var(--f-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; }
+.tablewrap { overflow-x: auto; }
+
+/* Code */
+.code { margin-top: 28px; display: grid; gap: 12px; }
+.code-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.code-head h3 { font-size: 1.35rem; }
+.steps { display: flex; gap: 8px; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; counter-reset: s; }
+.steps li { counter-increment: s; font-size: 0.92rem; background: var(--bg); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px 4px 6px; display: inline-flex; align-items: center; gap: 8px; }
+.steps li::before { content: counter(s); width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: var(--surface); display: inline-grid; place-items: center; font-weight: 700; font-size: 0.8rem; }
+.copy { font: inherit; font-weight: 700; font-size: 1rem; border: 0; border-radius: 12px; padding: 10px 18px; cursor: pointer; background: var(--accent); color: var(--surface); }
+.copy.done { background: var(--pine); }
+.codebox { position: relative; background: var(--code-bg); color: var(--code-ink); border-radius: 14px; overflow: auto; max-height: 520px; }
+.codebox pre { margin: 0; padding: 16px 18px; font-family: var(--f-mono); font-size: 0.86rem; line-height: 1.55; tab-size: 2; }
+.codebox .file { position: sticky; top: 0; display: block; padding: 8px 18px; font-family: var(--f-mono); font-size: 0.75rem; color: var(--code-comment); background: var(--code-bg); border-bottom: 1px solid rgba(255,255,255,0.08); }
+.codebox code { background: none; padding: 0; border-radius: 0; color: inherit; font-size: inherit; }
+.codebox ::selection { background: rgba(255, 214, 107, 0.35); color: #ffffff; }
+.codebox .c { color: var(--code-comment); }
+.codebox .try { color: var(--code-try); font-weight: 600; }
+.legend-try { font-size: 0.9rem; color: var(--muted); }
+.legend-try b { color: var(--ink); background: var(--code-bg); color: var(--code-try); padding: 1px 6px; border-radius: 4px; font-family: var(--f-mono); font-weight: 600; }
+.callout { margin-top: 20px; border: 2px dashed var(--accent); border-radius: 14px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.callout p { max-width: 60ch; }
+
+/* Freischalten */
+.door.locked .n::after {
+  content: ""; display: inline-block; width: 10px; height: 8px; margin-left: 8px; vertical-align: middle;
+  border-radius: 2px; background: var(--accent); position: relative; top: -3px;
+  box-shadow: 0 -5px 0 -2px var(--tint), 0 -6px 0 -1px var(--accent);
+}
+.lock { display: grid; gap: 14px; max-width: 640px; }
+.lock h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); }
+.lock form { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+.lock input {
+  flex: 1 1 240px; min-width: 0; font-family: var(--f-mono); font-size: 1.25rem; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 10px 14px; border-radius: 12px; border: 2px solid var(--line); background: var(--bg); color: var(--ink);
+}
+.lock input:focus { border-color: var(--accent); outline: none; }
+.lock .msg { min-height: 1.4em; font-weight: 700; }
+.lock .msg.err { color: var(--berry); }
+.lock .msg.ok { color: var(--pine); }
+.lock .hint { color: var(--muted); font-size: 0.95rem; }
+.lock .card { background: var(--gold-soft); border-radius: 12px; padding: 12px 14px; font-size: 0.95rem; }
+.unlocked-note { font-size: 0.88rem; color: var(--pine); font-weight: 700; }
+
+/* Arduino einrichten */
+.guide { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: clamp(18px, 3vw, 32px); }
+.guide-body { display: grid; gap: 10px; max-width: 74ch; }
+.guide-body h3 { font-size: 1.25rem; margin-top: 14px; }
+.guide-body ol, .guide-body ul { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.guide-body ul ul { margin-top: 6px; }
+
+/* Hilfe & Infos: Kacheln zu den Unterseiten */
+.infos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 14px; }
+.info { display: grid; gap: 8px; align-content: start; padding: 20px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line);
+  color: var(--ink); text-decoration: none; transition: transform .15s ease, border-color .15s ease; }
+.info:hover { transform: translateY(-2px); border-color: var(--pine); }
+.info[aria-current="page"] { border: 2px solid var(--pine); padding: 19px; }
+.info svg { width: 36px; height: 36px; color: var(--pine); fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.info .t { font-family: var(--f-display); font-weight: 700; font-size: 1.2rem; line-height: 1.2; }
+.info .d { color: var(--muted); font-size: 0.95rem; }
+.info .go { color: var(--pine); font-weight: 700; font-size: 0.95rem; margin-top: 4px; }
+.sitefoot { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 0.9rem; color: var(--muted); }
+
+/* Unterseiten */
+.topbar { background: #143f30; color: #fff; }
+.topbar .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 14px; }
+.topbar .brand { color: #fff; text-decoration: none; font-family: var(--f-display); font-weight: 700; font-size: 1.3rem; }
+.topbar .brand span { color: #f2c200; }
+.topbar .back { color: #fff; text-decoration: none; font-weight: 700; font-size: 0.95rem; border: 1px solid rgba(255,255,255,0.4); border-radius: 999px; padding: 6px 14px; }
+.topbar .back:hover { background: rgba(255,255,255,0.12); }
+.pagehead { padding-block: 36px 20px; }
+.pagehead h1 { font-size: clamp(2rem, 5vw, 3rem); margin-top: 6px; }
+.pagehead p { color: var(--muted); max-width: 62ch; margin-top: 10px; font-size: 1.1rem; }
+.page { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: clamp(18px, 3vw, 32px); }
+.parts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.parts section { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; }
+.parts h2 { font-size: 1.25rem; margin-bottom: 8px; }
+.parts table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.parts td { padding: 6px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.parts tr:last-child td { border-bottom: 0; }
+.parts td.n { text-align: right; white-space: nowrap; font-family: var(--f-mono); font-size: 0.88rem; padding-left: 12px; }
+.parts small { color: var(--muted); }
+.kaufen { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 22px; }
+.kaufen div { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; display: grid; gap: 4px; }
+.kaufen div.sum { background: var(--pine-soft); border-color: var(--pine-soft); }
+.kaufen b { font-weight: 700; }
+.kaufen .price { font-family: var(--f-mono); color: var(--pine); font-weight: 600; font-size: 1.05rem; }
+.kaufen small { color: var(--muted); }
+.legend-big { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-top: 20px; }
+.legend-big div { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: grid; gap: 6px; justify-items: center; text-align: center; }
+.legend-big .sch { height: 54px; width: auto; max-width: 100%; }
+.legend-big b { font-size: 1rem; }
+.legend-big small { color: var(--muted); font-size: 0.86rem; line-height: 1.4; }
+.rules { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.rules li { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 14px; align-items: start; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+.rules li i { width: 36px; height: 36px; border-radius: 50%; background: var(--pine); color: var(--surface); display: grid; place-items: center; font-style: normal; font-weight: 700; font-family: var(--f-display); }
+.rules b { display: block; margin-bottom: 2px; }
+.more { margin-top: 40px; }
+.more h2 { font-size: 1.3rem; }
+h2.sub { font-size: 1.4rem; margin: 26px 0 12px; }
+.parts td.n.wide { font-family: var(--f-body); font-size: 0.95rem; white-space: normal; }
+
+/* Unterer Teil */
+.section { margin-top: 56px; }
+.section > h2 { font-size: 1.6rem; margin-bottom: 6px; }
+.section > p { color: var(--muted); max-width: 64ch; margin-bottom: 16px; }
+.legend { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.legend div { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; display: grid; gap: 4px; justify-items: center; font-size: 0.88rem; }
+.legend .sch { height: 46px; width: auto; max-width: 100%; }
+.two { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; }
+.safety { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+.foot { margin-top: 48px; font-size: 0.88rem; color: var(--muted); max-width: 72ch; }
+
+@media (max-width: 960px) {
+  .infos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .parts, .kaufen { grid-template-columns: minmax(0, 1fr); }
+  .day-body, .two { grid-template-columns: minmax(0, 1fr); }
+  .need { grid-template-columns: minmax(0, 1fr); }
+  .hero::before { background: linear-gradient(90deg, rgba(20,63,48,0.96) 0%, rgba(20,63,48,0.85) 55%, rgba(20,63,48,0.4) 100%); }
+  .figure { position: static; order: -1; }
+  .doors { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .hero { flex-direction: column; align-items: stretch; min-height: 0; }
+  .hero-img { position: static; height: 240px; object-position: 75% 55%; }
+  .hero::before { display: none; }
+  .hero .wrap { padding-block: 26px 30px; }
+  .hero-note { top: 206px; bottom: auto; }
+  .need ul { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 520px) {
+  .infos { grid-template-columns: minmax(0, 1fr); }
+  .doors { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .door { min-height: 88px; }
+  .door .n { font-size: 1.7rem; }
+  .door.fin { grid-column: span 3; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="currentColor"/></marker></defs>
+</svg>
+<header class="topbar"><div class="wrap"><a class="brand" href="./">Elfen-<span>Werkstatt</span></a><a class="back" href="./">← Zum Kalender</a></div></header>
+<main class="wrap">
+  <div class="pagehead"><div class="eyebrow">Bitte vor Tag 1 lesen</div><h1>Sicherheit</h1><p>Alle Projekte laufen mit 5 Volt über USB und sind ungefährlich, wenn ihr diese Regeln beachtet.</p></div>
+  <ol class="rules"><li><i>1</i><div><b>Strom nur über den Nano</b>5 Volt aus dem USB-C-Netzteil oder dem Computer. Keine Batterien, keine Steckdose.</div></li><li><i>2</i><div><b>Nie ohne Vorwiderstand</b>Eine LED immer mit Widerstand anschließen. Das lange Bein ist Plus.</div></li><li><i>3</i><div><b>Kein Kurzschluss</b>Plus und Minus nie direkt miteinander verbinden. Wird ein Bauteil oder der Nano warm, sofort das USB-Kabel ziehen.</div></li><li><i>4</i><div><b>Elkos haben eine Richtung</b>Der helle Streifen auf dem Kondensator markiert Minus.</div></li><li><i>5</i><div><b>Umbauen nur ohne Strom</b>Vor dem Umstecken das USB-Kabel ziehen. Erst wieder einstecken, wenn alles mit dem Schaltplan übereinstimmt.</div></li><li><i>6</i><div><b>Kerzen nur als Motiv</b>Keine echte Flamme am Steckbrett und keine Bauteile in die Nähe von Kerzen.</div></li><li><i>7</i><div><b>Kleinteile wegräumen</b>Nicht in die Hände von Kindern unter 3 Jahren. Nach dem Basteln alles zurück in die Kit-Box.</div></li><li><i>8</i><div><b>Gemeinsam bauen</b>Ab 8 Jahren zusammen mit einem Erwachsenen. Die Erwachsenen prüfen vor dem Einschalten kurz die Verkabelung.</div></li></ol>
+  <section class="more"><h2>Weitere Hilfe</h2><nav class="infos" aria-label="Hilfe und Infos"><a class="info" href="einrichten.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M1 20h22M9.5 10l2 2 3.5-3.5"/></svg><span class="t">Arduino einrichten</span></a><a class="info" href="schaltplan-lesen.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 12h4l1.5-4 3 8 3-8 3 8 1.5-4h5"/></svg><span class="t">So liest du einen Schaltplan</span></a><a class="info" href="bauteile.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg><span class="t">Bauteile</span></a><a class="info" href="sicherheit.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><span class="t">Sicherheit</span></a></nav></section>
+  <footer class="sitefoot">Elfen-Werkstatt · Fragen? Schreibt uns einfach über Etsy.</footer>
+</main>
+</body>
+</html>
