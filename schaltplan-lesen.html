@@ -6,10 +6,143 @@
 <title>So liest du einen Schaltplan · Elfen-Werkstatt</title>
 <meta name="description" content="Ein Schaltplan zeigt, welche Bauteile miteinander verbunden sind, nicht, wo sie auf dem Steckbrett stecken. Jede Linie ist eine Verbindung. Ein Punkt bedeutet: Hier treffen sich Leitungen.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fredoka:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+
 <style>
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/AtkinsonHyperlegible-400i-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/AtkinsonHyperlegible-400i-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/AtkinsonHyperlegible-400-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/AtkinsonHyperlegible-400-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/AtkinsonHyperlegible-700-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/AtkinsonHyperlegible-700-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(fonts/Fredoka-500-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(fonts/Fredoka-500-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(fonts/Fredoka-600-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(fonts/Fredoka-600-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(fonts/Fredoka-700-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(fonts/Fredoka-700-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/JetBrainsMono-400-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/JetBrainsMono-400-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/JetBrainsMono-600-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/JetBrainsMono-600-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 /* Layout: Ein Adventskalender als Werkbank. Oben 24 Türchen, darunter öffnet sich die Tageskarte mit Schaltplan. */
 :root {
   --bg: #eef2f6;
@@ -272,6 +405,29 @@ code { background: var(--bg); padding: 1px 5px; border-radius: 4px; }
 h2.sub { font-size: 1.4rem; margin: 26px 0 12px; }
 .parts td.n.wide { font-family: var(--f-body); font-size: 0.95rem; white-space: normal; }
 
+/* Fußzeile und Rechtliches */
+.sitefoot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 20px; }
+.sitefoot .legal { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.sitefoot a, .linkbtn { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+.linkbtn { background: none; border: 0; padding: 0; font: inherit; cursor: pointer; }
+.sitefoot a:hover, .linkbtn:hover { color: var(--ink); }
+.legal-text { display: grid; gap: 10px; max-width: 78ch; }
+.legal-text h2 { font-size: 1.2rem; margin-top: 14px; }
+.legal-text h2:first-child { margin-top: 0; }
+.legal-text ul { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.legal-text .stand { color: var(--muted); font-size: 0.9rem; margin-top: 10px; }
+
+/* Datenschutz-Hinweis mit Einwilligung */
+.consent { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; padding: 0 12px calc(12px + env(safe-area-inset-bottom, 0px)); pointer-events: none; }
+.consent-box { pointer-events: auto; max-width: 760px; margin-inline: auto; background: var(--surface); color: var(--ink); border: 1px solid var(--line);
+  border-radius: 18px; padding: 18px 20px; box-shadow: 0 12px 40px rgba(12, 19, 32, 0.25); display: grid; gap: 10px; }
+.consent-box h2 { font-size: 1.15rem; }
+.consent-box p { font-size: 0.95rem; color: var(--muted); }
+.consent-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.consent-actions .btn { flex: 1 1 200px; font-weight: 700; padding: 10px 14px; background: var(--pine); color: var(--surface); border-color: var(--pine); }
+.consent-box .links { font-size: 0.88rem; display: flex; gap: 16px; }
+.consent-box .links a { color: var(--muted); }
+
 /* Unterer Teil */
 .section { margin-top: 56px; }
 .section > h2 { font-size: 1.6rem; margin-bottom: 6px; }
@@ -320,7 +476,7 @@ h2.sub { font-size: 1.4rem; margin: 26px 0 12px; }
   <div class="pagehead"><div class="eyebrow">Grundlagen</div><h1>So liest du einen Schaltplan</h1><p>Ein Schaltplan zeigt, welche Bauteile miteinander verbunden sind, nicht, wo sie auf dem Steckbrett stecken. Jede Linie ist eine Verbindung. Ein Punkt bedeutet: Hier treffen sich Leitungen.</p></div>
   <div class="legend-big"><div><svg class="sch" viewBox="-14 -34 98 68" role="img" aria-label="Widerstand" xmlns="http://www.w3.org/2000/svg"><polyline class="w" points="0,0 17.0,0.0"/><polyline class="w" points="53.0,0.0 70,0"/><g transform="translate(35.0,0.0) rotate(0.0)"><rect class="b" x="-18" y="-7" width="36" height="14"/></g></svg><b>Widerstand</b><small>Bremst den Strom. Die Zahl daneben sagt, wie stark (Ω = Ohm).</small></div><div><svg class="sch" viewBox="-14 -34 98 68" role="img" aria-label="LED (leuchtet)" xmlns="http://www.w3.org/2000/svg"><polyline class="w" points="0,0 27.0,0.0"/><polyline class="w" points="43.0,0.0 70,0"/><g transform="translate(35.0,0.0) rotate(0.0)"><path class="b" style="fill:var(--led-red)" d="M-8,-9L-8,9L8,0Z"/><path class="w" d="M8,-9V9"/><path class="w thin" d="M1,-12L8,-19" marker-end="url(#ah)"/><path class="w thin" d="M6,-10L13,-17" marker-end="url(#ah)"/></g></svg><b>LED (leuchtet)</b><small>Leuchtet, wenn Strom in Pfeilrichtung fließt. Der Strich ist Minus, das kurze Bein.</small></div><div><svg class="sch" viewBox="-14 -34 98 68" role="img" aria-label="LED als Sensor" xmlns="http://www.w3.org/2000/svg"><polyline class="w" points="0,0 27.0,0.0"/><polyline class="w" points="43.0,0.0 70,0"/><g transform="translate(35.0,0.0) rotate(0.0)"><path class="b" style="fill:var(--led-red)" d="M-8,-9L-8,9L8,0Z"/><path class="w" d="M8,-9V9"/><path class="w thin" d="M10,-21L3,-14" marker-end="url(#ah)"/><path class="w thin" d="M15,-18L8,-11" marker-end="url(#ah)"/></g></svg><b>LED als Sensor</b><small>Eine LED, die Licht misst. Die Pfeile zeigen zur LED hin.</small></div><div><svg class="sch" viewBox="-14 -34 98 68" role="img" aria-label="Diode" xmlns="http://www.w3.org/2000/svg"><polyline class="w" points="0,0 27.0,0.0"/><polyline class="w" points="43.0,0.0 70,0"/><g transform="translate(35.0,0.0) rotate(0.0)"><path class="b" style="fill:var(--sch-bg)" d="M-8,-9L-8,9L8,0Z"/><path class="w" d="M8,-9V9"/></g></svg><b>Diode</b><small>Lässt Strom nur in eine Richtung durch. Der Strich ist der Ring auf dem Bauteil.</small></div><div><svg class="sch" viewBox="-14 -34 98 68" role="img" aria-label="Taster" xmlns="http://www.w3.org/2000/svg"><polyline class="w" points="0,0 21.0,0.0"/><polyline class="w" points="49.0,0.0 70,0"/><g transform="translate(35.0,0.0) rotate(0.0)"><circle class="o" cx="-12" cy="0" r="2.6"/><circle class="o" cx="12" cy="0" r="2.6"/><path class="w" d="M-14,-8H14M0,-8V-17M-6,-17H6"/></g></svg><b>Taster</b><small>Verbindet, solange er gedrückt wird.</small></div><div><svg class="sch" viewBox="-14 -34 98 68" role="img" aria-label="Kondensator" xmlns="http://www.w3.org/2000/svg"><polyline class="w" points="0,0 31.0,0.0"/><polyline class="w" points="39.0,0.0 70,0"/><g transform="translate(35.0,0.0) rotate(0.0)"><path class="w" d="M-4,-11V11M4,-11V11"/></g></svg><b>Kondensator</b><small>Speichert kurz ein wenig Energie. Ohne Richtung.</small></div><div><svg class="sch" viewBox="-14 -34 98 68" role="img" aria-label="Elko (gepolt)" xmlns="http://www.w3.org/2000/svg"><polyline class="w" points="0,0 31.0,0.0"/><polyline class="w" points="39.0,0.0 70,0"/><g transform="translate(35.0,0.0) rotate(0.0)"><path class="w" d="M-4,-11V11"/><rect class="fill" x="3" y="-11" width="4" height="22"/><path class="w thin" d="M-13,-12h6M-10,-15v6"/></g></svg><b>Elko (gepolt)</b><small>Größerer Energiespeicher. Das Plus-Zeichen zeigt die Richtung.</small></div><div><svg class="sch" viewBox="-14 -34 98 68" role="img" aria-label="Trimmer" xmlns="http://www.w3.org/2000/svg"><polyline class="w" points="0,0 17.0,0.0"/><polyline class="w" points="53.0,0.0 70,0"/><g transform="translate(35.0,0.0) rotate(0.0)"><rect class="b" x="-18" y="-7" width="36" height="14"/><path class="w" d="M-14,12L13,-11" marker-end="url(#ah)"/></g></svg><b>Trimmer</b><small>Verstellbarer Widerstand, erkennbar am Pfeil.</small></div><div><svg class="sch" viewBox="-14 -34 98 68" role="img" aria-label="Summer" xmlns="http://www.w3.org/2000/svg"><polyline class="w" points="0,0 23.0,0.0"/><polyline class="w" points="47.0,0.0 70,0"/><g transform="translate(35.0,0.0) rotate(0.0)"><rect class="b" x="-12" y="-10" width="24" height="20" rx="3"/><path class="w thin" d="M-5,-5V5M-1,-7V7M3,-5V5M7,-3V3"/><path class="w thin" d="M-22,-13h6M-19,-16v6"/></g></svg><b>Summer</b><small>Macht Töne. Das Plus-Zeichen zeigt die Richtung.</small></div><div><svg class="sch" viewBox="-14 -50 108 100" role="img" aria-label="Transistor NPN" xmlns="http://www.w3.org/2000/svg"><circle class="b" cx="40" cy="0" r="17"/><path class="w" d="M6,0H33M33,-11V11M33,-5L48,-14V-34M48,14V34"/><path class="w" d="M33,5L48,14" marker-end="url(#ah)"/><text class="ref" x="62" y="-18" text-anchor="start"></text></svg><b>Transistor NPN</b><small>Ein elektrischer Schalter: B steuert, C und E schalten. Der Pfeil zeigt zum Emitter E.</small></div><div><svg class="sch" viewBox="-4 -22 49 66" role="img" aria-label="Plus (5 V)" xmlns="http://www.w3.org/2000/svg"><polyline class="w" points="11,10 29,10"/><text class="net" x="20" y="3" text-anchor="middle">+5V</text><polyline class="w" points="20,10 20,30"/></svg><b>Plus (5 V)</b><small>Hier kommen die 5 Volt vom Nano an.</small></div><div><svg class="sch" viewBox="-4 -14 48 54" role="img" aria-label="Minus (GND)" xmlns="http://www.w3.org/2000/svg"><polyline class="w" points="20,0 20,16"/><path class="w" d="M10,16H30M13.5,20.5H26.5M17,25H23"/></svg><b>Minus (GND)</b><small>Masse. Alle diese Zeichen sind miteinander verbunden.</small></div></div>
   <section class="more"><h2>Weitere Hilfe</h2><nav class="infos" aria-label="Hilfe und Infos"><a class="info" href="einrichten.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M1 20h22M9.5 10l2 2 3.5-3.5"/></svg><span class="t">Arduino einrichten</span></a><a class="info" href="schaltplan-lesen.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 12h4l1.5-4 3 8 3-8 3 8 1.5-4h5"/></svg><span class="t">So liest du einen Schaltplan</span></a><a class="info" href="bauteile.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg><span class="t">Bauteile</span></a><a class="info" href="sicherheit.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><span class="t">Sicherheit</span></a></nav></section>
-  <footer class="sitefoot">Elfen-Werkstatt · Fragen? Schreibt uns einfach über Etsy.</footer>
+  <footer class="sitefoot"><span>Elfen-Werkstatt · Fragen? Schreibt uns einfach über Etsy.</span><span class="legal"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></span></footer>
 </main>
 </body>
 </html>
