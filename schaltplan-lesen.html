@@ -222,10 +222,24 @@ code { background: var(--bg); padding: 1px 5px; border-radius: 4px; }
 .hero-note { position: absolute; right: 14px; bottom: 10px; z-index: 2; font-size: 0.75rem; color: #fff; background: rgba(0,0,0,0.35); padding: 2px 8px; border-radius: 6px; }
 
 /* Was ihr kaufen müsst: breite Box unter dem Hero */
-.need { margin-block: 28px 34px; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px 24px;
-  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); gap: 18px 28px; align-items: center; }
-.need h2 { font-size: 1.35rem; }
-.need h2 small { display: block; font-family: var(--f-body); font-size: 0.88rem; font-weight: 400; color: var(--muted); margin-top: 4px; }
+.need { margin-block: 22px 30px; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; }
+.need[open] { border-color: var(--pine); }
+.need > summary { list-style: none; display: flex; align-items: center; gap: 16px; padding: 16px 22px; cursor: pointer; border-radius: 18px; }
+.need > summary::-webkit-details-marker { display: none; }
+.need > summary:hover .need-toggle { background: var(--pine); color: var(--surface); }
+.need-icon { flex: none; width: 46px; height: 46px; border-radius: 50%; background: var(--pine-soft); color: var(--pine); display: grid; place-items: center; }
+.need-icon svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.need-title { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.need-title b { font-family: var(--f-display); font-size: 1.3rem; font-weight: 700; }
+.need-title small { color: var(--muted); font-size: 0.95rem; }
+.need .need-title .price { font-size: inherit; font-weight: 700; }
+.need-toggle { flex: none; font-weight: 700; font-size: 0.95rem; color: var(--pine); border: 1px solid var(--pine); border-radius: 999px; padding: 7px 14px; display: inline-flex; align-items: center; gap: 8px; transition: background .15s ease, color .15s ease; }
+.need-toggle::after { content: ""; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform .2s ease; }
+.need[open] .need-toggle::after { transform: rotate(-135deg) translateY(-1px); }
+.need .zu { display: none; }
+.need[open] .auf { display: none; }
+.need[open] .zu { display: inline; }
+.need-body { display: grid; gap: 14px; padding: 4px 22px 22px; }
 .need ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
 .need li { display: grid; gap: 2px; padding: 12px 14px; border-radius: 12px; background: var(--bg); }
 .need li b { font-weight: 700; }
@@ -234,11 +248,11 @@ code { background: var(--bg); padding: 1px 5px; border-radius: 4px; }
 .shop { justify-self: start; margin-top: 4px; font-size: 0.9rem; font-weight: 700; color: var(--pine); text-decoration: none; border: 1px solid var(--pine); border-radius: 999px; padding: 3px 12px; }
 .shop:hover { background: var(--pine); color: var(--surface); }
 .need small { color: var(--muted); font-size: 0.88rem; line-height: 1.45; }
-.need .optional { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: 0.92rem; color: var(--muted); background: var(--bg); border-radius: 12px; padding: 12px 14px; }
+.need .optional { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: 0.92rem; color: var(--muted); background: var(--bg); border-radius: 12px; padding: 12px 14px; }
 .need .optional b { color: var(--ink); }
 .optional-links { display: flex; flex-wrap: wrap; gap: 8px; }
 .optional .shop, .kaufen .shop.small { margin-top: 0; font-size: 0.85rem; }
-.need .extra { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px 28px; padding-top: 12px; border-top: 1px dashed var(--line); }
+.need .extra { display: flex; flex-wrap: wrap; gap: 6px 28px; padding-top: 12px; border-top: 1px dashed var(--line); }
 
 /* Türchen */
 .doors-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px 20px; margin-block: 8px 14px; }
@@ -459,7 +473,6 @@ h2.sub { font-size: 1.4rem; margin: 26px 0 12px; }
   .infos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .parts, .kaufen, .wege { grid-template-columns: minmax(0, 1fr); }
   .day-body, .two { grid-template-columns: minmax(0, 1fr); }
-  .need { grid-template-columns: minmax(0, 1fr); }
   .hero::before { background: linear-gradient(90deg, rgba(20,63,48,0.96) 0%, rgba(20,63,48,0.85) 55%, rgba(20,63,48,0.4) 100%); }
   .figure { position: static; order: -1; }
   .doors { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -471,6 +484,9 @@ h2.sub { font-size: 1.4rem; margin: 26px 0 12px; }
   .hero .wrap { padding-block: 26px 30px; }
   .hero-note { top: 206px; bottom: auto; }
   .need ul { grid-template-columns: minmax(0, 1fr); }
+  .need > summary { flex-wrap: wrap; padding: 14px 16px; }
+  .need-toggle { width: 100%; justify-content: center; }
+  .need-body { padding: 4px 16px 18px; }
 }
 @media (max-width: 520px) {
   .infos { grid-template-columns: minmax(0, 1fr); }
