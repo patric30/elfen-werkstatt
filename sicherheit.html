@@ -234,6 +234,10 @@ code { background: var(--bg); padding: 1px 5px; border-radius: 4px; }
 .shop { justify-self: start; margin-top: 4px; font-size: 0.9rem; font-weight: 700; color: var(--pine); text-decoration: none; border: 1px solid var(--pine); border-radius: 999px; padding: 3px 12px; }
 .shop:hover { background: var(--pine); color: var(--surface); }
 .need small { color: var(--muted); font-size: 0.88rem; line-height: 1.45; }
+.need .optional { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: 0.92rem; color: var(--muted); background: var(--bg); border-radius: 12px; padding: 12px 14px; }
+.need .optional b { color: var(--ink); }
+.optional-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.optional .shop, .kaufen .shop.small { margin-top: 0; font-size: 0.85rem; }
 .need .extra { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px 28px; padding-top: 12px; border-top: 1px dashed var(--line); }
 
 /* Türchen */
@@ -390,6 +394,14 @@ code { background: var(--bg); padding: 1px 5px; border-radius: 4px; }
 .kaufen { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 22px; }
 .kaufen div { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; display: grid; gap: 4px; }
 .kaufen div.sum { background: var(--pine-soft); border-color: var(--pine-soft); }
+.kaufen div.opt { grid-column: 1 / -1; background: var(--bg); display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.kaufen div.opt .shop { margin-top: 0; }
+.strom { margin-top: 26px; }
+.strom h2 { font-size: 1.4rem; margin-bottom: 12px; }
+.wege { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.wege > div { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; }
+.wege h3 { font-family: var(--f-display); font-size: 1.15rem; margin-bottom: 8px; }
+.wege ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
 .kaufen b { font-weight: 700; }
 .kaufen .price { font-family: var(--f-mono); color: var(--pine); font-weight: 600; font-size: 1.05rem; }
 .kaufen small { color: var(--muted); }
@@ -445,7 +457,7 @@ h2.sub { font-size: 1.4rem; margin: 26px 0 12px; }
 
 @media (max-width: 960px) {
   .infos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .parts, .kaufen { grid-template-columns: minmax(0, 1fr); }
+  .parts, .kaufen, .wege { grid-template-columns: minmax(0, 1fr); }
   .day-body, .two { grid-template-columns: minmax(0, 1fr); }
   .need { grid-template-columns: minmax(0, 1fr); }
   .hero::before { background: linear-gradient(90deg, rgba(20,63,48,0.96) 0%, rgba(20,63,48,0.85) 55%, rgba(20,63,48,0.4) 100%); }
@@ -477,7 +489,7 @@ h2.sub { font-size: 1.4rem; margin: 26px 0 12px; }
 <header class="topbar"><div class="wrap"><a class="brand" href="./">Elfen-<span>Werkstatt</span></a><a class="back" href="./">← Zum Kalender</a></div></header>
 <main class="wrap">
   <div class="pagehead"><div class="eyebrow">Bitte vor Tag 1 lesen</div><h1>Sicherheit</h1><p>Alle Projekte laufen mit 5 Volt über USB und sind ungefährlich, wenn ihr diese Regeln beachtet.</p></div>
-  <ol class="rules"><li><i>1</i><div><b>Strom nur über den Nano</b>5 Volt aus dem USB-C-Netzteil oder dem Computer. Keine Batterien, keine Steckdose.</div></li><li><i>2</i><div><b>Nie ohne Vorwiderstand</b>Eine LED immer mit Widerstand anschließen. Das lange Bein ist Plus.</div></li><li><i>3</i><div><b>Kein Kurzschluss</b>Plus und Minus nie direkt miteinander verbinden. Wird ein Bauteil oder der Nano warm, sofort das USB-Kabel ziehen.</div></li><li><i>4</i><div><b>Elkos haben eine Richtung</b>Der helle Streifen auf dem Kondensator markiert Minus.</div></li><li><i>5</i><div><b>Umbauen nur ohne Strom</b>Vor dem Umstecken das USB-Kabel ziehen. Erst wieder einstecken, wenn alles mit dem Schaltplan übereinstimmt.</div></li><li><i>6</i><div><b>Kerzen nur als Motiv</b>Keine echte Flamme am Steckbrett und keine Bauteile in die Nähe von Kerzen.</div></li><li><i>7</i><div><b>Kleinteile wegräumen</b>Nicht in die Hände von Kindern unter 3 Jahren. Nach dem Basteln alles zurück in die Kit-Box.</div></li><li><i>8</i><div><b>Gemeinsam bauen</b>Ab 8 Jahren zusammen mit einem Erwachsenen. Die Erwachsenen prüfen vor dem Einschalten kurz die Verkabelung.</div></li></ol>
+  <ol class="rules"><li><i>1</i><div><b>Nur 5 Volt</b>Strom kommt über den Nano aus einem USB-Netzteil oder Computer, oder an Tag 1 bis 12 aus der 9-V-Batterie über das Stromversorgungsmodul. Nie aus der Steckdose.</div></li><li><i>2</i><div><b>Die 9-V-Batterie nie direkt anschließen</b>Nur über das Stromversorgungsmodul, beide Steckbrücken auf 5V. Die Batteriepole nie mit Metall berühren. Nach dem Basteln Schalter aus und Batterie abklemmen.</div></li><li><i>3</i><div><b>Immer nur eine Stromquelle</b>Entweder der Nano oder das Stromversorgungsmodul versorgt das Steckbrett, nie beide gleichzeitig.</div></li><li><i>4</i><div><b>Nie ohne Vorwiderstand</b>Eine LED immer mit Widerstand anschließen. Das lange Bein ist Plus.</div></li><li><i>5</i><div><b>Kein Kurzschluss</b>Plus und Minus nie direkt miteinander verbinden. Wird ein Bauteil oder der Nano warm, sofort das USB-Kabel ziehen.</div></li><li><i>6</i><div><b>Elkos haben eine Richtung</b>Der helle Streifen auf dem Kondensator markiert Minus.</div></li><li><i>7</i><div><b>Umbauen nur ohne Strom</b>Vor dem Umstecken das USB-Kabel ziehen. Erst wieder einstecken, wenn alles mit dem Schaltplan übereinstimmt.</div></li><li><i>8</i><div><b>Kerzen nur als Motiv</b>Keine echte Flamme am Steckbrett und keine Bauteile in die Nähe von Kerzen.</div></li><li><i>9</i><div><b>Kleinteile wegräumen</b>Nicht in die Hände von Kindern unter 3 Jahren. Nach dem Basteln alles zurück in die Kit-Box.</div></li><li><i>10</i><div><b>Gemeinsam bauen</b>Ab 8 Jahren zusammen mit einem Erwachsenen. Die Erwachsenen prüfen vor dem Einschalten kurz die Verkabelung.</div></li></ol>
   <section class="more"><h2>Weitere Hilfe</h2><nav class="infos" aria-label="Hilfe und Infos"><a class="info" href="einrichten.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M1 20h22M9.5 10l2 2 3.5-3.5"/></svg><span class="t">Arduino einrichten</span></a><a class="info" href="schaltplan-lesen.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 12h4l1.5-4 3 8 3-8 3 8 1.5-4h5"/></svg><span class="t">So liest du einen Schaltplan</span></a><a class="info" href="bauteile.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg><span class="t">Bauteile</span></a><a class="info" href="sicherheit.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><span class="t">Sicherheit</span></a></nav></section>
   <footer class="sitefoot"><span>Elfen-Werkstatt · Fragen? Schreibt uns einfach über Etsy.</span><span class="legal"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></span></footer>
 </main>
